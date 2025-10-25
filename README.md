@@ -34,3 +34,15 @@ cd quizly.backend
 ```
 
 2. Create and activate a virtual environment:
+
+```bash
+python3 -m venv env
+```
+```bash
+source env/bin/activate   # macOS/Linux
+```
+```bash
+env\Scripts\activate      # Windows
+```
+```bash
+```
