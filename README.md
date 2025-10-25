@@ -28,4 +28,9 @@ Backend for the **Quizly** project, providing APIs and functionality for quiz ma
 
 ```bash
 git clone https://github.com/your-username/quizly.backend.git
+```
+```bash
 cd quizly.backend
+```
+
+2. Create and activate a virtual environment:
