@@ -44,7 +44,7 @@ source env/bin/activate   # macOS/Linux
 ```bash
 env\Scripts\activate      # Windows
 ```
-3. Install dependencies:
+### 3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 
@@ -53,7 +53,7 @@ pip install -r requirements.txt
 
 ## 🗄 Database Setup
 
-1. Create migrations and migrate:
+### 1. Create migrations and migrate:
 ```bash
 python manage.py makemigrations
 ```
@@ -61,7 +61,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-2. Optionally, create a superuser:
+### 2. Optionally, create a superuser:
 
 ```bash
 python manage.py createsuperuser
@@ -70,19 +70,19 @@ python manage.py createsuperuser
 
 ## 🎤 Whisper AI Setup
 
-1. Install Whisper AI:
+### 1. Install Whisper AI:
    
 ```bash
 pip install openai-whisper
 ```
-2. Install FFmpeg:
+### 2. Install FFmpeg:
    
 ```bash
 brew install ffmpeg 
 ```
 
-3. Example usage:
-4. 
+### 3. Example usage:
+
 ```bash
 import whisper
 
@@ -95,23 +95,23 @@ print(result["text"])
 
 🪐 Gemini AI Setup
 
-1. Install Gemini AI SDK:
+### 1. Install Gemini AI SDK:
    
 ```bash
 pip install google-genai
 ```
-2. Get a Gemini API key:
+### 2. Get a Gemini API key:
    
 Sign up and generate an API key here: 🪐 [Gemini Developer API](https://ai.google.dev/)  
 
 
-4. Set your API key as an environment variable:
+### 4. Set your API key as an environment variable:
    
 ```bash
 export GEMINI_API_KEY='your_api_key'
 ```
 
-4. Example usage:
+### 4. Example usage:
    
 ```bash
 from google import genai
@@ -124,7 +124,7 @@ print(response)
 ---
 🏃 Running the Project
 
-Start the Django server:
+### Start the Django server:
 ```bash
 python manage.py runserver
 ```
