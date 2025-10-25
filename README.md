@@ -62,12 +62,70 @@ python manage.py migrate
 ```
 
 2. Optionally, create a superuser:
-3. 
+
 ```bash
 python manage.py createsuperuser
 ```
+---
+
+## 🎤 Whisper AI Setup
+
+1. Install Whisper AI:
+   
 ```bash
+pip install openai-whisper
 ```
+2. Install FFmpeg:
+   
+```bash
+brew install ffmpeg 
+```
+
+3. Example usage:
+4. 
+```bash
+import whisper
+
+model = whisper.load_model("base")
+result = model.transcribe("audio.mp3")
+print(result["text"])
+```
+
+---
+
+🪐 Gemini AI Setup
+
+1. Install Gemini AI SDK:
+   
+```bash
+pip install google-genai
+```
+2. Get a Gemini API key:
+Sign up and generate an API key here: Gemini Developer API
+4. Set your API key as an environment variable:
+   
+```bash
+export GEMINI_API_KEY='your_api_key'
+```
+
+4. Example usage:
+   
+```bash
+from google import genai
+
+client = genai.Client(api_key='your_api_key')
+response = client.generate("Say hello in German!")
+print(response)
+```
+
+---
+🏃 Running the Project
+
+Start the Django server:
+```bash
+python manage.py runserver
+```
+
 ```bash
 ```
 ```bash
