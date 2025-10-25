@@ -44,5 +44,34 @@ source env/bin/activate   # macOS/Linux
 ```bash
 env\Scripts\activate      # Windows
 ```
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+
+```
+---
+
+## 🗄 Database Setup
+
+1. Create migrations and migrate:
+```bash
+python manage.py makemigrations
+```
+```bash
+python manage.py migrate
+```
+
+2. Optionally, create a superuser:
+3. 
+```bash
+python manage.py createsuperuser
+```
 ```bash
 ```
+```bash
+```
+```bash
+```
+```bash
+```
+
