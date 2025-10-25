@@ -102,7 +102,8 @@ pip install google-genai
 ```
 2. Get a Gemini API key:
    
-Sign up and generate an API key here: Gemini Developer API
+Sign up and generate an API key here: 🪐 [Gemini Developer API](https://ai.google.dev/)  
+
 
 4. Set your API key as an environment variable:
    
