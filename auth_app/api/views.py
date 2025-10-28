@@ -73,7 +73,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
         )
 
         response.data = {
-            "detail": "Login successfully",
+            "detail": "Login successfully!",
             "user":{
                 "id": user.id,
                 "username": user.username,
@@ -82,28 +82,70 @@ class CookieTokenObtainPairView(TokenObtainPairView):
         }
         return response
 
+# class CookieTokenRefreshView(APIView):
+#     """
+#     API view to refresh the access token using a refresh token from cookies.
+
+#     Uses the custom CookieRefreshAuthentication to extract the refresh token
+#     from the request cookies. Returns a new access token and sets it as a cookie.
+
+#     Attributes:
+#         authentication_classes: Uses CookieRefreshAuthentication.
+#         permission_classes: Requires the user to be authenticated via refresh token.
+
+#     Methods:
+#         post(request):
+#             Reads the refresh token from cookies.
+#             Returns a new access token if the refresh token is valid.
+#             Returns HTTP 401 if refresh token is missing or invalid.
+#     """
+#     authentication_classes = [CookieRefreshAuthentication]
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request):
+       
+#         refresh_token = request.COOKIES.get("refresh_token")
+
+#         if not refresh_token:
+#             return Response(
+#                 {"detail": "Refresh token missing"},
+#                 status=status.HTTP_401_UNAUTHORIZED
+#             )
+
+#         try:
+#             refresh = RefreshToken(refresh_token)
+#             access = refresh.access_token  
+
+#             response = Response(
+#                 {"detail": "Token refreshed", "access": str(access)},
+#                 status=status.HTTP_200_OK
+#             )
+
+        
+#             response.set_cookie(
+#                 key="access_token",
+#                 value=str(access),
+#                 httponly=True,
+#                 secure=True,  
+#                 samesite="Lax"
+#             )
+
+#             return response
+
+#         except TokenError:
+#             return Response(
+#                 {"detail": "Invalid refresh token"},
+#                 status=status.HTTP_401_UNAUTHORIZED
+#             )
+        
 class CookieTokenRefreshView(APIView):
     """
     API view to refresh the access token using a refresh token from cookies.
 
-    Uses the custom CookieRefreshAuthentication to extract the refresh token
-    from the request cookies. Returns a new access token and sets it as a cookie.
-
-    Attributes:
-        authentication_classes: Uses CookieRefreshAuthentication.
-        permission_classes: Requires the user to be authenticated via refresh token.
-
-    Methods:
-        post(request):
-            Reads the refresh token from cookies.
-            Returns a new access token if the refresh token is valid.
-            Returns HTTP 401 if refresh token is missing or invalid.
+    If the refresh token is missing or invalid, returns HTTP 401.
+    Returns a new access token and sets it as a cookie if successful.
     """
-    authentication_classes = [CookieRefreshAuthentication]
-    permission_classes = [IsAuthenticated]
-
     def post(self, request):
-       
         refresh_token = request.COOKIES.get("refresh_token")
 
         if not refresh_token:
@@ -121,15 +163,14 @@ class CookieTokenRefreshView(APIView):
                 status=status.HTTP_200_OK
             )
 
-        
+            # Set new access_token as a cookie
             response.set_cookie(
                 key="access_token",
                 value=str(access),
                 httponly=True,
-                secure=True,  
+                secure=True,
                 samesite="Lax"
             )
-
             return response
 
         except TokenError:

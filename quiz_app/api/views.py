@@ -1,3 +1,4 @@
+from rest_framework import exceptions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -85,12 +86,16 @@ class QuizListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+
 class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    """
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+    def get_object(self):
+        obj = super().get_object()
+        if obj.user != self.request.user:
+            raise exceptions.PermissionDenied("You do not have permission to access this quiz.")
+        return obj
+    
