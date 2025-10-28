@@ -103,7 +103,7 @@ class CookieTokenRefreshView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        # Refresh-Token aus den Cookies holen
+       
         refresh_token = request.COOKIES.get("refresh_token")
 
         if not refresh_token:
@@ -114,19 +114,19 @@ class CookieTokenRefreshView(APIView):
 
         try:
             refresh = RefreshToken(refresh_token)
-            access = refresh.access_token  # neuen Access-Token erzeugen
+            access = refresh.access_token  
 
             response = Response(
                 {"detail": "Token refreshed", "access": str(access)},
                 status=status.HTTP_200_OK
             )
 
-            # Access-Token als Cookie setzen
+        
             response.set_cookie(
                 key="access_token",
                 value=str(access),
                 httponly=True,
-                secure=True,  # in Produktion True
+                secure=True,  
                 samesite="Lax"
             )
 
