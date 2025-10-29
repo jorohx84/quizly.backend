@@ -4,54 +4,15 @@ import whisper
 import re
 import os
 
-# Whisper-Modell einmal laden
+
 _whisper_model = whisper.load_model("base")
 
-# Gemini Client vorbereiten
 client = genai.Client(api_key="AIzaSyDZt3P8I-_pdLH7L4aQvx8qmrTwgvMVeYk")
-
 
 from yt_dlp import YoutubeDL
 import os
 
-# def download_audio(youtube_url, output_path="audio.mp3"):
-#     """
-#     Lädt Audio eines YouTube-Videos herunter und gibt den Pfad zur MP3 zurück.
-#     """
-#     if not youtube_url:
-#         raise ValueError("No YouTube URL provided.")
 
-#     base_name = os.path.splitext(output_path)[0]  # -> "audio"
-#     output_template = f"{base_name}.%(ext)s"
-
-#     ydl_opts = {
-#         "format": "bestaudio/best",
-#         "outtmpl": output_template,
-#         "postprocessors": [{
-#             "key": "FFmpegExtractAudio",
-#             "preferredcodec": "mp3",
-#         }],
-#         "quiet": False,
-#         "no_warnings": True,
-#     }
-
-#     try:
-#         with YoutubeDL(ydl_opts) as ydl:
-#             ydl.download([youtube_url])
-
-#         # Prüfen, welches File erzeugt wurde (mp3)
-#         if os.path.exists(f"{base_name}.mp3"):
-#             return f"{base_name}.mp3"
-#         elif os.path.exists(f"{base_name}.mp3.mp3"):
-#             # Fallback falls yt-dlp doppelt .mp3 angehängt hat
-#             new_name = f"{base_name}.mp3"
-#             os.rename(f"{base_name}.mp3.mp3", new_name)
-#             return new_name
-#         else:
-#             raise FileNotFoundError(f"Audio file not found after download: {output_path}")
-
-#     except Exception as e:
-#         raise RuntimeError(f"Failed to download audio: {str(e)}")
 def download_audio(youtube_url, output_path="audio.mp3"):
     """
     downloads audio from a YouTube video and returns the path to the MP3.

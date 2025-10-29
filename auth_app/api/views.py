@@ -1,13 +1,12 @@
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from rest_framework import generics, status
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.views import TokenObtainPairView 
 from .serializers import RegistrationSerializer
-from .authentication import CookieRefreshAuthentication
+
 
 class RegistrationView(APIView):
     """
@@ -82,61 +81,8 @@ class CookieTokenObtainPairView(TokenObtainPairView):
         }
         return response
 
-# class CookieTokenRefreshView(APIView):
-#     """
-#     API view to refresh the access token using a refresh token from cookies.
 
-#     Uses the custom CookieRefreshAuthentication to extract the refresh token
-#     from the request cookies. Returns a new access token and sets it as a cookie.
 
-#     Attributes:
-#         authentication_classes: Uses CookieRefreshAuthentication.
-#         permission_classes: Requires the user to be authenticated via refresh token.
-
-#     Methods:
-#         post(request):
-#             Reads the refresh token from cookies.
-#             Returns a new access token if the refresh token is valid.
-#             Returns HTTP 401 if refresh token is missing or invalid.
-#     """
-#     authentication_classes = [CookieRefreshAuthentication]
-#     permission_classes = [IsAuthenticated]
-
-#     def post(self, request):
-       
-#         refresh_token = request.COOKIES.get("refresh_token")
-
-#         if not refresh_token:
-#             return Response(
-#                 {"detail": "Refresh token missing"},
-#                 status=status.HTTP_401_UNAUTHORIZED
-#             )
-
-#         try:
-#             refresh = RefreshToken(refresh_token)
-#             access = refresh.access_token  
-
-#             response = Response(
-#                 {"detail": "Token refreshed", "access": str(access)},
-#                 status=status.HTTP_200_OK
-#             )
-
-        
-#             response.set_cookie(
-#                 key="access_token",
-#                 value=str(access),
-#                 httponly=True,
-#                 secure=True,  
-#                 samesite="Lax"
-#             )
-
-#             return response
-
-#         except TokenError:
-#             return Response(
-#                 {"detail": "Invalid refresh token"},
-#                 status=status.HTTP_401_UNAUTHORIZED
-#             )
         
 class CookieTokenRefreshView(APIView):
     """
@@ -163,7 +109,6 @@ class CookieTokenRefreshView(APIView):
                 status=status.HTTP_200_OK
             )
 
-            # Set new access_token as a cookie
             response.set_cookie(
                 key="access_token",
                 value=str(access),
@@ -178,6 +123,7 @@ class CookieTokenRefreshView(APIView):
                 {"detail": "Invalid refresh token"},
                 status=status.HTTP_401_UNAUTHORIZED
             )
+
 
 class LogoutView(APIView):
     """
@@ -198,7 +144,7 @@ class LogoutView(APIView):
         if refresh_token:
             try:
                 token = RefreshToken(refresh_token)
-                token.blacklist()  # funktioniert nur, wenn token noch nicht geblacklistet
+                token.blacklist() 
             except TokenError:
                 pass
 

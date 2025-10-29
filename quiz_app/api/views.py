@@ -8,57 +8,20 @@ from quiz_app.models import Quiz
 from .functions import create_quiz_from_video
 
 
-# class CreateQuizView(APIView):
-#     """
-#     POST /api/createQuiz/
-#     Erstellt ein neues Quiz basierend auf einer YouTube-URL.
-#     """
-#     permission_classes = [IsAuthenticated]
-
-#     def post(self, request):
-#         serializer = QuizCreateSerializer(data=request.data)
-#         if not serializer.is_valid():
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#         video_url = serializer.validated_data["video_url"]
-
-#         try:
-#             audio_file = download_audio(video_url)
-#             transcript = transcribe_audio(audio_file) or ""
-#             quiz_json, raw_text = generate_quiz(transcript)
-
-#             if not quiz_json or not quiz_json.get("questions"):
-#                 return Response({
-#                     "detail": "Failed to generate quiz.",
-#                     "raw_text": raw_text
-#                 }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-#             quiz = Quiz.objects.create(
-#                 title=quiz_json.get("title", "Generated Quiz"),
-#                 description=quiz_json.get("description", ""),
-#                 video_url=video_url,
-#                 user=request.user  # ✅ Besitzer setzen
-#             )
-
-#             # Fragen hinzufügen
-#             for q in quiz_json["questions"]:
-#                 quiz.questions.create(
-#                     question_title=q.get("question_title", "No title"),
-#                     question_options=";".join(q.get("question_options", [])),
-#                     answer=q.get("answer", "")
-#                 )
-
-#             # Serializer für Ausgabe
-#             output_serializer = QuizSerializer(quiz)
-#             return Response(output_serializer.data, status=status.HTTP_201_CREATED)
-
-#         except Exception as e:
-#             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 class CreateQuizView(APIView):
     """
-    POST /api/createQuiz/
-    Erstellt ein neues Quiz basierend auf einer YouTube-URL.
+    API endpoint for creating a new quiz based on a provided video URL.
+
+    This view requires authentication. It expects a POST request containing
+    a valid video URL, from which a quiz will be generated using the
+    `create_quiz_from_video` utility.
+
+    Methods:
+        post(request):
+            Validate the input data, generate a quiz, and return the created quiz data.
+
+    Permissions:
+        - IsAuthenticated: Only authenticated users can create quizzes.
     """
     permission_classes = [IsAuthenticated]
 
@@ -67,7 +30,7 @@ class CreateQuizView(APIView):
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        video_url = serializer.validated_data["video_url"]
+        video_url = serializer.validated_data["url"]
 
         try:
             quiz = create_quiz_from_video(video_url, request.user)
@@ -78,6 +41,19 @@ class CreateQuizView(APIView):
 
 
 class QuizListView(APIView):
+    """
+    API endpoint for listing all quizzes created by the authenticated user.
+
+    This view returns a list of quizzes associated with the current user,
+    including their related questions. It supports only GET requests.
+
+    Methods:
+        get(request):
+            Retrieve all quizzes belonging to the authenticated user.
+
+    Permissions:
+        - IsAuthenticated: Only authenticated users can view their quizzes.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -89,6 +65,20 @@ class QuizListView(APIView):
 
 
 class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint for retrieving, updating, or deleting a specific quiz.
+
+    This view allows authenticated users to access only their own quizzes.
+    It provides full CRUD operations (retrieve, update, delete) for a quiz instance.
+
+    Methods:
+        get_object():
+            Ensures that the requested quiz belongs to the authenticated user.
+            Raises a PermissionDenied exception if the user does not own the quiz.
+
+    Permissions:
+        - IsAuthenticated: Only authenticated users can access this endpoint.
+    """
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
     permission_classes = [IsAuthenticated]
