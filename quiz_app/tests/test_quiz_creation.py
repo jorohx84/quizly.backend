@@ -12,7 +12,6 @@ def test_create_quiz_view_creates_quiz(monkeypatch):
     user = User.objects.create_user(username="testuser", password="12345")
     client.force_authenticate(user=user)
 
-    # ✅ Fake Gemini + Audio-Download pipeline
     monkeypatch.setattr("quiz_app.api.functions.download_audio", lambda url: "fake_audio.mp3")
     monkeypatch.setattr("quiz_app.api.functions.transcribe_audio", lambda f: "Fake transcript")
     monkeypatch.setattr(
@@ -30,9 +29,8 @@ def test_create_quiz_view_creates_quiz(monkeypatch):
         }, "RAW")
     )
 
-    response = client.post("/api/createQuiz/", {"video_url": "https://youtube.com/watch?v=test"}, format="json")
+    response = client.post("/api/createQuiz/", {"url": "https://youtube.com/watch?v=test"}, format="json")
 
-    # ✅ Expect HTTP 201 CREATED
     assert response.status_code == 201
     data = response.json()
     assert data["title"] == "Test Quiz"

@@ -47,7 +47,6 @@ def test_login_missing_fields():
     client = APIClient()
     data = {
         "username": "testuser"
-        # Passwort fehlt
     }
 
     response = client.post("/api/login/", data, format="json")

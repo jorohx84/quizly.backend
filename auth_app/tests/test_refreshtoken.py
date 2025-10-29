@@ -10,14 +10,11 @@ def test_token_refresh_success():
     client = APIClient()
     user = User.objects.create_user(username="testuser", password="12345")
 
-    # Zunächst ein Login, um Refresh-Token zu erhalten
     login_data = {"username": "testuser", "password": "12345"}
     login_response = client.post("/api/login/", login_data, format="json")
 
-    # refresh_token sollte als Cookie gesetzt sein
     assert "refresh_token" in login_response.cookies
 
-    # Token refresh request
     response = client.post("/api/token/refresh/")
     assert response.status_code == 200
     json_data = response.json()

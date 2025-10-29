@@ -12,7 +12,6 @@ def test_get_quiz_detail_success():
     user = User.objects.create_user(username="testuser", password="12345")
     client.force_authenticate(user=user)
 
-    # Quiz und Frage erstellen
     quiz = Quiz.objects.create(
         user=user,
         title="My Quiz",
@@ -26,7 +25,6 @@ def test_get_quiz_detail_success():
     )
     quiz.questions.add(question)
 
-    # Request an den Detail-Endpoint
     response = client.get(f"/api/quizzes/{quiz.id}/")
     assert response.status_code == 200
 

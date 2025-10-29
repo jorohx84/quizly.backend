@@ -12,7 +12,6 @@ def test_get_quizzes_returns_user_quizzes():
     user = User.objects.create_user(username="testuser", password="12345")
     client.force_authenticate(user=user)
 
-    # Test-Quiz erstellen
     quiz = Quiz.objects.create(
         user=user,
         title="Test Quiz",
@@ -20,23 +19,21 @@ def test_get_quizzes_returns_user_quizzes():
         video_url="https://youtube.com"
     )
 
-    # Frage erstellen
     question = Question.objects.create(
         question_title="Was ist 2+2?",
         question_options=["1", "2", "3", "4"],
         answer="4"
     )
 
-    # Frage zum Quiz hinzufügen
     quiz.questions.add(question)
 
-    # API Request
+  
     response = client.get("/api/quizzes/")
 
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 1
-    assert data[0]["title"] == "Test Quiz"  # stimmt jetzt mit erstellt
+    assert data[0]["title"] == "Test Quiz"  
     assert len(data[0]["questions"]) == 1
-    assert data[0]["questions"][0]["question_title"] == "Was ist 2+2?"  # deutsch
+    assert data[0]["questions"][0]["question_title"] == "Was ist 2+2?" 
 
