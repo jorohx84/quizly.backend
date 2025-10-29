@@ -27,7 +27,6 @@ def test_register_missing_fields():
     client = APIClient()
     data = {
         "username": "user2",
-        # password fehlt
         "confirmed_password": "something",
         "email": "user2@example.com"
     }
