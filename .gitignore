@@ -82,3 +82,8 @@ docs/_build/
 *.db
 *.bak
 *.tmp
+
+
+
+temp_audio.mp3
+*.mp3
