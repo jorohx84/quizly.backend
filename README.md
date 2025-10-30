@@ -75,20 +75,10 @@ python manage.py createsuperuser
 ```bash
 pip install openai-whisper
 ```
-### 2. Install FFmpeg:
+## Install FFmpeg:
    
 ```bash
 brew install ffmpeg 
-```
-
-### 3. Example usage:
-
-```bash
-import whisper
-
-model = whisper.load_model("base")
-result = model.transcribe("audio.mp3")
-print(result["text"])
 ```
 
 ---
