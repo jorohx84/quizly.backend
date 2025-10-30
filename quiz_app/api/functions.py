@@ -5,8 +5,6 @@ from .utils import clean_gemini_json, download_audio, transcribe_audio
 import json
 import os
 
-# client = genai.Client(api_key="AIzaSyDZt3P8I-_pdLH7L4aQvx8qmrTwgvMVeYk")
-import os
 load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_GENAI_API_KEY")
