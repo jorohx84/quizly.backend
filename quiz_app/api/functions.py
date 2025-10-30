@@ -1,12 +1,20 @@
 from google import genai
+from dotenv import load_dotenv
 from ..models import Quiz
 from .utils import clean_gemini_json, download_audio, transcribe_audio
 import json
 import os
 
-client = genai.Client(api_key="AIzaSyDZt3P8I-_pdLH7L4aQvx8qmrTwgvMVeYk")
+# client = genai.Client(api_key="AIzaSyDZt3P8I-_pdLH7L4aQvx8qmrTwgvMVeYk")
 import os
+load_dotenv()
 
+GOOGLE_API_KEY = os.getenv("GOOGLE_GENAI_API_KEY")
+
+if not GOOGLE_API_KEY:
+    raise ValueError("Missing GOOGLE_GENAI_API_KEY in environment variables")
+
+client = genai.Client(api_key=GOOGLE_API_KEY)
 
 def generate_quiz(transcript):
     """

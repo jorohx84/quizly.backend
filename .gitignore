@@ -83,6 +83,8 @@ docs/_build/
 *.bak
 *.tmp
 
+.env
+.env.*
 
 
 temp_audio.mp3
