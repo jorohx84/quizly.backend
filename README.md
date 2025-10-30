@@ -38,11 +38,13 @@ cd quizly.backend
 ```bash
 python3 -m venv env
 ```
+### Linux / MacOs
 ```bash
-source env/bin/activate   # macOS/Linux
+source env/bin/activate   
 ```
+### Windows
 ```bash
-env\Scripts\activate      # Windows
+env\Scripts\activate     
 ```
 ### 3. Install dependencies:
 ```bash
