@@ -91,10 +91,8 @@ pip install google-genai
    
 Sign up and generate an API key here: 🪐 [Gemini Developer API](https://ai.google.dev/)  
 
-
-### 4. Set your API key as an environment variable:
    
-### 🔐 Environment Variables (Storing Your API Keys)
+#### 🔐 Environment Variables (Storing Your API Keys)
 
 To keep your API keys secure and out of the source code, this project uses a **`.env` file**.  
 You should never hard-code secrets like API keys directly into Python files or commit them to GitHub.
@@ -113,17 +111,6 @@ GOOGLE_GENAI_API_KEY=your-google-genai-api-key-here
 
 ```
 
-
-
-### 4. Example usage:
-   
-```bash
-from google import genai
-
-client = genai.Client(api_key='your_api_key')
-response = client.generate("Say hello in German!")
-print(response)
-```
 
 ---
 🏃 Running the Project
