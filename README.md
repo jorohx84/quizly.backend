@@ -68,19 +68,16 @@ python manage.py createsuperuser
 ```
 ---
 
-## 🎤 Whisper AI Setup
-
-### 1. Install Whisper AI:
-   
-```bash
-pip install openai-whisper
-```
 ## Install FFmpeg:
-   
+### Linux / MacOs
 ```bash
 brew install ffmpeg 
 ```
 
+### Windows
+```bash
+brew install ffmpeg 
+```
 ---
 
 🪐 Gemini AI Setup
