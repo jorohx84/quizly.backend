@@ -27,7 +27,7 @@ Backend for the **Quizly** project, providing APIs and functionality for quiz ma
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/quizly.backend.git
+git clone https://github.com/jorohx84/quizly.backend.git
 ```
 ```bash
 cd quizly.backend
