@@ -68,19 +68,19 @@ python manage.py createsuperuser
 ```
 ---
 
-## Install FFmpeg:
+## 🧩 Install FFmpeg (Required for Audio Transcription)
 ### Linux / MacOs
 ```bash
 brew install ffmpeg 
 ```
 
 ### Windows
+1.  Download:
 ```bash
-brew install ffmpeg 
+ https://ffmpeg.org/download.html
 ```
----
 
-🪐 Gemini AI Setup
+## 🪐 Gemini AI Setup
 
 ### 1. Install Gemini AI SDK:
    
