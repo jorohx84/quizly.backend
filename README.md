@@ -82,12 +82,7 @@ brew install ffmpeg
 
 ## 🪐 Gemini AI Setup
 
-### 1. Install Gemini AI SDK:
-   
-```bash
-pip install google-genai
-```
-### 2. Get a Gemini API key:
+### Get a Gemini API key:
    
 Sign up and generate an API key here: 🪐 [Gemini Developer API](https://ai.google.dev/)  
 
@@ -99,7 +94,7 @@ You should never hard-code secrets like API keys directly into Python files or c
 
 ---
 
-### ⚙️ 1. Create a `.env` file
+### ⚙️ Create a `.env` file
 
 In the **root directory** of your Django project (next to `manage.py`), create a file named `.env`:
 
