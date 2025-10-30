@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-
+import re
 class RegistrationSerializer(serializers.ModelSerializer):
     """
     Serializer for user registration.
@@ -9,6 +9,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
     the password correctly twice.
 
     Methods:
+        validate_password(value):
+            Validates that the password meets complexity requirements.
+
         validate(attrs):
             Checks that 'password' and 'confirmed_password' match.
             Raises a ValidationError if they do not.
@@ -23,6 +26,15 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'password', 'confirmed_password']
 
+    
+    def validate_password(self, value):
+        pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$'
+        if not re.match(pattern, value):
+            raise serializers.ValidationError(
+                "Password must be at least 6 characters long and include at least one uppercase letter (A-Z), one lowercase letter (a-z), and one number (0-9)."
+            )
+        return value
+    
     def validate(self, attrs):
         if attrs['password'] != attrs['confirmed_password']:
             raise serializers.ValidationError({"password": "password do not match"})

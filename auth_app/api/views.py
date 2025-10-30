@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
@@ -22,7 +22,8 @@ class RegistrationView(APIView):
             Returns HTTP 201 on successful registration or
             HTTP 400 if validation fails.
     """
-
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
