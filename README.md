@@ -51,23 +51,6 @@ pip install -r requirements.txt
 ```
 ---
 
-## 🗄 Database Setup
-
-### 1. Create migrations and migrate:
-```bash
-python manage.py makemigrations
-```
-```bash
-python manage.py migrate
-```
-
-### 2. Optionally, create a superuser:
-
-```bash
-python manage.py createsuperuser
-```
----
-
 ## 🧩 Install FFmpeg (Required for Audio Transcription)
 ### Linux / MacOs
 ```bash
@@ -105,7 +88,22 @@ In the **root directory** of your Django project (next to `manage.py`), create a
 GOOGLE_GENAI_API_KEY=your-google-genai-api-key-here
 
 ```
+## 🗄 Database Setup
 
+### 1. Create migrations and migrate:
+```bash
+python manage.py makemigrations
+```
+```bash
+python manage.py migrate
+```
+
+### 2. Optionally, create a superuser:
+
+```bash
+python manage.py createsuperuser
+```
+---
 
 ---
 🏃 Running the Project
