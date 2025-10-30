@@ -94,9 +94,26 @@ Sign up and generate an API key here: 🪐 [Gemini Developer API](https://ai.goo
 
 ### 4. Set your API key as an environment variable:
    
+### 🔐 Environment Variables (Storing Your API Keys)
+
+To keep your API keys secure and out of the source code, this project uses a **`.env` file**.  
+You should never hard-code secrets like API keys directly into Python files or commit them to GitHub.
+
+---
+
+### ⚙️ 1. Create a `.env` file
+
+In the **root directory** of your Django project (next to `manage.py`), create a file named `.env`:
+
+
+### Add your API key to your .env-file:
+
 ```bash
-export GEMINI_API_KEY='your_api_key'
+GOOGLE_GENAI_API_KEY=your-google-genai-api-key-here
+
 ```
+
+
 
 ### 4. Example usage:
    
